@@ -6,6 +6,7 @@ import Header from "./Header";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import { withRouter } from "../withRouter";
+import axios from "axios";
 
 class App extends Component {
   constructor(props) {
@@ -19,6 +20,31 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this);
   }
 
+  checkLoginStatus() {
+    axios
+      .get("http://localhost:3001/logged_in", { withCredentials: true })
+      .then((response) => {
+        if (
+          response.data.logged_in &&
+          this.state.loggedInStatus === "NOT_LOGGED_IN"
+        ) {
+          this.setState({
+            loggedInStatus: "LOGGED_IN",
+            user: response.data.user,
+          });
+        } else {
+          this.setState({
+            loggedInStatus: "NOT_LOGGED_IN",
+            user: {},
+          });
+        }
+      })
+      .catch((error) => console.log("check login error", error));
+  }
+  componentDidMount() {
+    this.checkLoginStatus();
+  }
+
   handleLogin(data) {
     if (data.logged_in) {
       this.setState({
@@ -29,17 +55,13 @@ class App extends Component {
     }
   }
 
-  checkLoginStatus() {
-    
-  }
-
   render() {
     return (
-      <React.StrictMode>
+      <div>
         <Header />
         <div className="app container mt-3">
           <Routes>
-            <Route path="/" element={<Home user={this.state.user.email}/>} />
+            <Route path="/" element={<Home user={this.state.user.email} />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route
               path="/signin"
@@ -51,7 +73,7 @@ class App extends Component {
             />
           </Routes>
         </div>
-      </React.StrictMode>
+      </div>
     );
   }
 }
