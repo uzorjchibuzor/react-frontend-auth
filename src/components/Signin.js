@@ -33,32 +33,40 @@ export default class Signin extends Component {
       })
       .then((response) => {
         if (response) {
-         this.props.handleLogin(response.data)
+          this.props.handleLogin(response.data);
         }
-      });
+      })
+      .catch((error) => console.log("error signing in", error));
     event.preventDefault();
   }
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter email address"
-          value={this.state.email}
-          onChange={this.handleChange}
-          required
-        />
-
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter password"
-          value={this.state.password}
-          onChange={this.handleChange}
-          required
-        />
-        <button type="submit">Log in</button>
+        <div className="form-group mb-3">
+          <label htmlFor="email">Email address: </label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter email address"
+            value={this.state.email}
+            onChange={this.handleChange}
+            required
+          />
+        </div>
+        <div className="form-group mb-3">
+          <label htmlFor="password">Password: </label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter password"
+            value={this.state.password}
+            onChange={this.handleChange}
+            required
+          />
+        </div>
+        <button className="btn btn-primary" type="submit">
+          Sign in
+        </button>
       </form>
     );
   }

@@ -29,6 +29,10 @@ class App extends Component {
     }
   }
 
+  checkLoginStatus() {
+    
+  }
+
   render() {
     return (
       <React.StrictMode>
@@ -41,10 +45,10 @@ class App extends Component {
               path="/signin"
               element={<Signin handleLogin={this.handleLogin} />}
             />
-            {/* <Route
+            <Route
               path="/signup"
               element={<Signup handleLogin={this.handleLogin} />}
-            /> */}
+            />
           </Routes>
         </div>
       </React.StrictMode>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
 
 const Header = (props) => {
   return (
@@ -18,7 +18,7 @@ const Header = (props) => {
               Dashboard
             </Link>
             <Nav.Link href="/signin">Sign in</Nav.Link>
-            <Nav.Link href="/signout">Sign out</Nav.Link>
+            <Nav.Link href="/signup">Sign up</Nav.Link>
 
             {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
