@@ -5,6 +5,7 @@ import Home from "./Home";
 import Header from "./Header";
 import Signin from "./Signin";
 import Signup from "./Signup";
+import Logout from "./Logout";
 import { withRouter } from "../withRouter";
 import axios from "axios";
 
@@ -18,6 +19,35 @@ class App extends Component {
     };
 
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogOut = this.handleLogOut.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+  }
+
+  handleLogOut(data) {
+    if (data.logged_out) {
+      this.setState({
+        loggedInStatus: "NOT_LOGGED_IN",
+        user: {},
+      });
+    }
+  }
+
+
+
+  handleLogoutClick() {
+    axios
+      .delete("http://localhost:3001/logout", { withCredentials: true })
+      .then((response) => {
+        if (response.data.logged_out) {
+          this.setState({
+            loggedInStatus: "NOT_LOGGED_IN",
+            user: {},
+          })
+          this.props.navigate("/");
+        }
+      })
+      .catch((error) => console.log("log out errors", error.message));
+    this.props.navigate("/");
   }
 
   checkLoginStatus() {
@@ -58,7 +88,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header inOrOut={this.state.loggedInStatus} />
         <div className="app container mt-3">
           <Routes>
             <Route path="/" element={<Home user={this.state.user.email} />} />
@@ -70,6 +100,11 @@ class App extends Component {
             <Route
               path="/signup"
               element={<Signup handleLogin={this.handleLogin} />}
+            />
+
+            <Route
+              path="/signout"
+              element={<Logout handleLogOut={this.handleLogoutClick} />}
             />
           </Routes>
         </div>
