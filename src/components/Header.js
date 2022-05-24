@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Container, Nav } from "react-bootstrap";
-import Logout from "./Logout";
 
 const Header = (props) => {
   const signedInStatus = (status) => {

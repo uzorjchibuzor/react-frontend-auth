@@ -28,7 +28,7 @@ export default class Signin extends Component {
       },
     };
     axios
-      .post("http://localhost:3001/sessions", body, {
+      .post("https://auth-app-api-rails-react.herokuapp.com/sessions", body, {
         withCredentials: true,
       })
       .then((response) => {

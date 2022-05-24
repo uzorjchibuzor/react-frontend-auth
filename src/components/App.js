@@ -36,7 +36,7 @@ class App extends Component {
 
   handleLogoutClick() {
     axios
-      .delete("http://localhost:3001/logout", { withCredentials: true })
+      .delete("https://auth-app-api-rails-react.herokuapp.com/logout", { withCredentials: true })
       .then((response) => {
         if (response.data.logged_out) {
           this.setState({
@@ -52,7 +52,7 @@ class App extends Component {
 
   checkLoginStatus() {
     axios
-      .get("http://localhost:3001/logged_in", { withCredentials: true })
+      .get("https://auth-app-api-rails-react.herokuapp.com/logged_in", { withCredentials: true })
       .then((response) => {
         if (
           response.data.logged_in &&

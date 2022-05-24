@@ -30,7 +30,7 @@ export default class Signup extends Component {
       },
     };
     axios
-      .post("http://localhost:3001/registrations", body, {
+      .post("https://auth-app-api-rails-react.herokuapp.com/registrations", body, {
         withCredentials: true,
       })
       .then((response) => {
